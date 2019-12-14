@@ -28,7 +28,7 @@ public class Network {
 
     public void retrieveJson(LocalDate date){
         JSONParser parser = new JSONParser();
-        nasaAPODURL = ("https://api.nasa.gov/planetary/apod?api_key=PeBOFpPWbOsvRyIhgbZSygh1gHVMaFi00gAj2WqT"+"&date="+date.toString());
+        nasaAPODURL = ("https://api.nasa.gov/planetary/apod?api_key=/*INSERT API KEY HERE*/"+"&date="+date.toString());
         System.out.println(nasaAPODURL);
         Controller.setApodURL(nasaAPODURL);
 
@@ -49,10 +49,9 @@ public class Network {
                 this.title = (json.get("title") != null) ? json.get("title").toString() : " ";
                 retrieveImage((json.get("hdurl") != null) ? json.get("hdurl").toString() : null);
             }else{
+                
                 System.out.println("Error Connecting, Resposne Code: " + connection.getResponseCode());
             }
-
-
 
             connection.disconnect();
 
@@ -102,7 +101,6 @@ public class Network {
         if (apodImage != null){
             return new APOD(this.title, this.explanationText, this.creditText, this.date, this.apodImage);
         }
-
         return null;
     }
 }
